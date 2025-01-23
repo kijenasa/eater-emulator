@@ -1,9 +1,17 @@
 #include<stdint.h>
 #include<stdlib.h>
 
-#define MEMORY_SIZE;
+#ifndef CPU_H
+#define CPU_H
+
+#define MEMORY_SIZE 16
+
+// Index positions of flags[]
+#define CARRY 0
+#define IS_ZERO 1
 
 typedef struct {
+  uint8_t flags[2];
   uint8_t bus;
   uint8_t register_a;
   uint8_t register_b;
@@ -19,3 +27,5 @@ cpu *cpu_new();
 void cpu_free(cpu *c);
 
 void execute_instruction(cpu *c); // TODO: add param for instruction
+
+#endif
