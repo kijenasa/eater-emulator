@@ -3,7 +3,7 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-void memory_in(cpu *cm int addr);
-void memory_out(cpu *c, int addr);
+void memory_in(cpu *c);
+void memory_out(cpu *c);
 
 #endif
