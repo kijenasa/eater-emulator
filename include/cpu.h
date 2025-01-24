@@ -1,6 +1,8 @@
 #include<stdint.h>
 #include<stdlib.h>
 
+#include "../include/instruction.h"
+
 #ifndef CPU_H
 #define CPU_H
 
@@ -11,6 +13,7 @@
 #define IS_ZERO 1
 
 typedef struct {
+  uint8_t halt;
   uint8_t flags[2];
   uint8_t bus;
   uint8_t register_a;
@@ -26,6 +29,6 @@ cpu *cpu_new();
 
 void cpu_free(cpu *c);
 
-void execute_instruction(cpu *c); // TODO: add param for instruction
+void execute_instruction(cpu *c, instruction inst);
 
 #endif
