@@ -19,7 +19,7 @@ cpu *cpu_new() {
   out->output_register = 0;
   out->program_counter = 0;
   for(int i = 0; i <= MEMORY_SIZE; i++) {
-    out->memory[i] = 1;
+    out->memory[i] = 0;
   }
   return out;
 }
@@ -39,19 +39,20 @@ void execute_program(cpu *c, uint8_t visual) {
 }
 
 void display_cpu(cpu *c) {
-  DIAGRAM(c->bus,
-          c->program_counter,
+  DIAGRAM(c->program_counter,
           c->memory_address_register,
           c->memory[c->memory_address_register],
           c->instruction_register,
           c->register_a,
           c->register_b,
-          c->output_register);
+          c->output_register,
+          c->bus);
 }
 
 void execute_instruction(cpu *c) {
+  printf("INSTRUCTION: %d\n", c->instruction_register);
   switch((opcode) c->instruction_register) {
-    case NOP: instruction_nop(c); printf("NOP\n"); break;
+    case NOP: instruction_nop(c); break;
     case LDA: instruction_lda(c); break;
     case ADD: instruction_add(c); break;
     case SUB: instruction_sub(c); break;

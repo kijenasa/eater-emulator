@@ -6,7 +6,7 @@
 
 static void instruction_fetch(cpu *c) {
   register_out(c, c->program_counter);
-  memory_in(c);
+  register_in(c, &c->memory_address_register);
 
   memory_out(c);
   register_in(c, &c->instruction_register);

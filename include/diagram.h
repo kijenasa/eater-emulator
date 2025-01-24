@@ -1,6 +1,6 @@
 #define PAD_NUMBER(num) ((num) < 10 ? "00" : (num) < 100 ? "0" : ""), (num)
 
-#define DIAGRAM(bus, pc, mar, mem, ir, ra, rb, out) \
+#define DIAGRAM(pc, mar, mem, ir, ra, rb, out, bus) \
     printf( \
         "                            ┌─────┐┌─────────────────┐\n" \
         "                            │ Bus ││ Program Counter │\n" \
@@ -23,5 +23,5 @@
         "                            │     ││  %s%d            │\n" \
         "                            │ %s%d │└─────────────────┘\n" \
         "                            └─────┘                   \n", \
-        PAD_NUMBER(bus), PAD_NUMBER(pc), PAD_NUMBER(mar), PAD_NUMBER(mem), PAD_NUMBER(ir), PAD_NUMBER(ra), PAD_NUMBER(rb), PAD_NUMBER(out) \
+        PAD_NUMBER(pc), PAD_NUMBER(mar), PAD_NUMBER(mem), PAD_NUMBER(ir), PAD_NUMBER(ra), PAD_NUMBER(rb), PAD_NUMBER(out), PAD_NUMBER(bus) \
     );
