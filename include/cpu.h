@@ -29,6 +29,10 @@ cpu *cpu_new();
 
 void cpu_free(cpu *c);
 
-void execute_instruction(cpu *c, instruction inst);
+void execute_program(cpu *c, uint8_t visual);
+
+void display_cpu(cpu *c);
+
+void execute_instruction(cpu *c);
 
 #endif

@@ -1,6 +1,9 @@
-#include "../include/cpu.h"
+#include<stdio.h>
 
+#include "../include/cpu.h"
 #include "../include/control_logic.h"
+
+#include "../include/diagram.h"
 
 cpu *cpu_new() {
   cpu *out = malloc(sizeof(cpu));
@@ -15,6 +18,9 @@ cpu *cpu_new() {
   out->memory_address_register = 0;
   out->output_register = 0;
   out->program_counter = 0;
+  for(int i = 0; i <= MEMORY_SIZE; i++) {
+    out->memory[i] = 1;
+  }
   return out;
 }
 
@@ -22,9 +28,30 @@ void cpu_free(cpu *c) {
   free(c);
 }
 
-void execute_instruction(cpu *c, instruction inst) {
-  switch(inst) {
-    case NOP: instruction_nop(c); break;
+void execute_program(cpu *c, uint8_t visual) {
+  while(!c->halt) {
+    if(visual) {
+      display_cpu(c);
+      getchar();
+    }
+    execute_instruction(c);
+  }
+}
+
+void display_cpu(cpu *c) {
+  DIAGRAM(c->bus,
+          c->program_counter,
+          c->memory_address_register,
+          c->memory[c->memory_address_register],
+          c->instruction_register,
+          c->register_a,
+          c->register_b,
+          c->output_register);
+}
+
+void execute_instruction(cpu *c) {
+  switch((opcode) c->instruction_register) {
+    case NOP: instruction_nop(c); printf("NOP\n"); break;
     case LDA: instruction_lda(c); break;
     case ADD: instruction_add(c); break;
     case SUB: instruction_sub(c); break;

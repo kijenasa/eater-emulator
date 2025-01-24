@@ -15,6 +15,4 @@ typedef enum {
   HLT
 } opcode;
 
-typedef uint8_t instruction;
-
 #endif
