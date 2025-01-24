@@ -1,10 +1,13 @@
 #include "../include/cpu.h"
 
+#include "../include/control_logic.h"
+
 cpu *cpu_new() {
   cpu *out = malloc(sizeof(cpu));
 
   out->halt = 0;
-  out->flags = {0,0};
+  out->flags[CARRY] = 0;
+  out->flags[IS_ZERO] = 0;
   out->bus = 0;
   out->register_a = 0;
   out->register_b = 0;

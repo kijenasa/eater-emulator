@@ -1,14 +1,16 @@
-#include "../include/cpu.h"
+#include "../include/control_logic.h"
+
 #include "../include/register.h"
 #include "../include/memory.h"
+#include "../include/alu.h"
 
-static instruction_fetch(cpu *c) {
+static void instruction_fetch(cpu *c) {
   register_out(c, c->program_counter);
   memory_in(c);
 
   memory_out(c);
-  register_in(c, c->instruction_register);
-  c->program_counter++:
+  register_in(c, &c->instruction_register);
+  c->program_counter++;
 }
 
 void instruction_nop(cpu *c) {
