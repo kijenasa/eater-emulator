@@ -22,6 +22,6 @@
         "                            │     ││ Output          │\n" \
         "                            │     ││  %s%d            │\n" \
         "                            │ %s%d │└─────────────────┘\n" \
-        "                            └─────┘                   \n", \
+        "                            └─────┘ github.com/kijenasa\n", \
         PAD_NUMBER(pc), PAD_NUMBER(mar), PAD_NUMBER(mem), PAD_NUMBER(ir), PAD_NUMBER(ra), PAD_NUMBER(rb), PAD_NUMBER(out), PAD_NUMBER(bus) \
     );

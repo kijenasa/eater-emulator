@@ -40,18 +40,18 @@ void execute_program(cpu *c, uint8_t visual) {
 
 void display_cpu(cpu *c) {
   DIAGRAM(c->program_counter,
-          c->memory_address_register,
-          c->memory[c->memory_address_register],
-          c->instruction_register,
+          c->memory_address_register % 16,
           c->register_a,
+          c->memory[c->memory_address_register % 16],
+          c->instruction_register,
           c->register_b,
           c->output_register,
           c->bus);
 }
 
 void execute_instruction(cpu *c) {
-  printf("INSTRUCTION: %d\n", c->instruction_register);
-  switch((opcode) c->instruction_register) {
+  printf("RUNNING %d\n", c->instruction_register % 16);
+  switch((opcode) c->instruction_register % 16) {
     case NOP: instruction_nop(c); break;
     case LDA: instruction_lda(c); break;
     case ADD: instruction_add(c); break;
