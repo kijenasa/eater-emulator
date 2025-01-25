@@ -7,4 +7,3 @@ NOP
 $1
 HLT
 NOP
-
