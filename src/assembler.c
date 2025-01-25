@@ -67,7 +67,7 @@ uint8_t *assemble(char *str) {
   }
 
   int byte_code_index;
-  for(int i = 0; i < count; i++) {
+  for(int i = 0; i < count && lines[i] != NULL; i++) {
     if(lines[i][0] == ';') continue;
     if(lines[i][0] == '$') {
       byte_code[byte_code_index] = atoi(&lines[i][1]);

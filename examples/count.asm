@@ -1,3 +1,4 @@
+; Counts up
 LDI 0
 OUT
 ADD 5
@@ -6,3 +7,4 @@ NOP
 $1
 HLT
 NOP
+
