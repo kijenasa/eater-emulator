@@ -16,25 +16,25 @@ static opcode get_opcode(char *str) {
   if(strcmp(str, "HLT") == 0) return HLT;
 }
 
-static int get_token_count(char *str, char delim) {
-  strtok(str, delim);
+static int get_token_count(char *str, char *delim) {
+  char *token = strtok(str, delim);
 
   int count = 0;
   while(token != NULL) {
     count++;
-    strtok(NULL, delim);
+    token = strtok(NULL, delim);
   }
 
   return count;
 }
 
-static **char get_lines(char *str, int count) {
-  char **lines = malloc(size_of(*char) * count);
+static char **get_lines(char *str, int count) {
+  char **lines = malloc(sizeof(char*) * count);
 
-  char *line = strtok(str, '\n');
-  for(int i = 0; token != NULL; i++) {
+  char *line = strtok(str, "\n");
+  for(int i = 0; line != NULL; i++) {
     lines[i] = line;
-    line = strtok(NULL, '\n');
+    line = strtok(NULL, "\n");
   }
 
   return lines;
@@ -44,10 +44,10 @@ static uint8_t get_instruction(char *str) {
   opcode op;
   uint8_t arg = 0;
 
-  char *token = strtok(str, ' ');
+  char *token = strtok(str, " ");
   op = get_opcode(token);
 
-  token = strtok(NULL, ' ');
+  token = strtok(NULL, " ");
   if(token != NULL) {
     arg = atoi(token);
   }
@@ -57,12 +57,12 @@ static uint8_t get_instruction(char *str) {
 }
 
 uint8_t *assemble(char *str) {
-  int count = get_token_count(str, '\n');
+  int count = get_token_count(str, "\n");
   char **lines = get_lines(str, count);
 
-  uint8_t *byte_code = malloc(size_of(uint8_t) * count);
+  uint8_t *byte_code = malloc(sizeof(uint8_t) * count);
 
-  for(int i = 0; l <= count; i++) {
+  for(int i = 0; i <= count; i++) {
     byte_code[i] = get_instruction(lines[i]);
   }
 
