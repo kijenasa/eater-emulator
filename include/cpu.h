@@ -14,9 +14,6 @@
 
 #define MEMORY_SIZE 16
 
-#define VISUAL 1
-
-// Index positions of flags[]
 #define CARRY 0
 #define IS_ZERO 1
 
@@ -37,7 +34,9 @@ cpu *cpu_new();
 
 void cpu_free(cpu *c);
 
-void execute_program(cpu *c, uint8_t visual);
+void execute_program(cpu *c);
+
+void memory_dump(cpu *c);
 
 void load_memory(cpu *c, uint8_t *bytes);
 

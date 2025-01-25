@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     load_memory(c, byt);
   }
 
-  execute_program(c, VISUAL);
+  execute_program(c);
 
   cpu_free(c);
   return EXIT_SUCCESS;

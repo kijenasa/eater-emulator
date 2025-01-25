@@ -28,13 +28,25 @@ void cpu_free(cpu *c) {
   free(c);
 }
 
-void execute_program(cpu *c, uint8_t mode) {
+void execute_program(cpu *c) {
+  clear_screen();
+  display_cpu(c);
   while(!c->halt) {
-    if(mode == VISUAL) {
-      display_cpu(c);
-      getchar();
+    char input = getchar();
+    switch(input) {
+      case 'm': memory_dump(c); break;
+      default: clear_screen(); display_cpu(c); break;
+    }
+    if(input != '\n') { // Empty the input buffer
+      while(getchar() != '\n');
     }
     execute_instruction(c);
+  }
+}
+
+void memory_dump(cpu *c) {
+  for(int i = 0; i < MEMORY_SIZE; i++) {
+    printf("0x%X: %d\n", i, c->memory[i]);
   }
 }
 
@@ -45,7 +57,6 @@ void load_memory(cpu *c, uint8_t *bytes) {
 }
 
 void display_cpu(cpu *c) {
-  clear_screen();
   DIAGRAM(c->program_counter % 16,
           c->memory_address_register % MEMORY_SIZE,
           c->register_a,
