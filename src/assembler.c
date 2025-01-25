@@ -66,8 +66,11 @@ uint8_t *assemble(char *str) {
     return NULL;
   }
 
+  int byte_code_index;
   for(int i = 0; i < count; i++) {
-    byte_code[i] = get_instruction(lines[i]);
+    if(lines[i][0] == ';') continue;
+    byte_code[byte_code_index] = get_instruction(lines[i]);
+    byte_code_index++;
   }
 
   return byte_code;

@@ -45,8 +45,8 @@ void load_memory(cpu *c, uint8_t *bytes) {
 }
 
 void display_cpu(cpu *c) {
-  clear_screen();
-  DIAGRAM(c->program_counter,
+//  clear_screen();
+  DIAGRAM(c->program_counter % 16,
           c->memory_address_register % MEMORY_SIZE,
           c->register_a,
           c->memory[c->memory_address_register % MEMORY_SIZE],
@@ -57,7 +57,6 @@ void display_cpu(cpu *c) {
 }
 
 void execute_instruction(cpu *c) {
-  printf("RUNNING %d\n", c->instruction_register % MEMORY_SIZE);
   switch((opcode) c->instruction_register % MEMORY_SIZE) {
     case NOP: instruction_nop(c); break;
     case LDA: instruction_lda(c); break;
