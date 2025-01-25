@@ -1,4 +1,5 @@
 #include<string.h>
+#include<stdio.h>
 
 #include "../include/assembler.h"
 
@@ -16,13 +17,13 @@ static opcode get_opcode(char *str) {
   if(strcmp(str, "HLT") == 0) return HLT;
 }
 
-static int get_token_count(char *str, char *delim) {
-  char *token = strtok(str, delim);
-
+static int get_token_count(char *str, char delim) {
   int count = 0;
-  while(token != NULL) {
-    count++;
-    token = strtok(NULL, delim);
+
+  for(int i = 0; i < strlen(str); i++) {
+    if(str[i] == delim) {
+      count++;
+    }
   }
 
   return count;
@@ -56,13 +57,52 @@ static uint8_t get_instruction(char *str) {
 }
 
 uint8_t *assemble(char *str) {
-  int count = get_token_count(str, "\n");
+  int count = get_token_count(str, '\n');
   char **lines = get_lines(str, count);
 
   uint8_t *byte_code = malloc(sizeof(uint8_t) * count);
+  if(byte_code == NULL) {
+    puts("Failed to allocate memory");
+    return NULL;
+  }
+
   for(int i = 0; i < count; i++) {
     byte_code[i] = get_instruction(lines[i]);
   }
+
+  return byte_code;
+}
+
+static int get_file_size(FILE *file) {
+  char ch;
+  int count = 0;
+  while ((ch = fgetc(file)) != EOF) {
+    count++;
+  }
+  rewind(file);
+
+  return count;
+}
+
+uint8_t *assemble_file(char *path) {
+  FILE *file = fopen(path, "r");
+
+  if(file == NULL) {
+    puts("Failed to open file");
+    return NULL;
+  }
+
+  int length = get_file_size(file);
+  char *contents = malloc(sizeof(char) * (length + 1));
+  if(contents == NULL) {
+    puts("Failed to allocate memory");
+    return NULL;
+  }
+
+  fread(contents, sizeof(char), length, file);
+  uint8_t *byte_code = assemble(contents);
+  
+  fclose(file);
 
   return byte_code;
 }

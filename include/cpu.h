@@ -3,6 +3,12 @@
 
 #include "../include/instruction.h"
 
+#ifdef _WIN32
+#define clear_screen() system("cls")
+#else
+#define clear_screen() system("clear")
+#endif
+
 #ifndef CPU_H
 #define CPU_H
 
@@ -32,6 +38,8 @@ cpu *cpu_new();
 void cpu_free(cpu *c);
 
 void execute_program(cpu *c, uint8_t visual);
+
+void load_memory(cpu *c, uint8_t *bytes);
 
 void display_cpu(cpu *c);
 

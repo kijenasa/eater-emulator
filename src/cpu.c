@@ -38,11 +38,18 @@ void execute_program(cpu *c, uint8_t mode) {
   }
 }
 
+void load_memory(cpu *c, uint8_t *bytes) {
+  for(int i = 0; i < MEMORY_SIZE; i++) {
+    c->memory[i] = bytes[i];
+  }
+}
+
 void display_cpu(cpu *c) {
+  clear_screen();
   DIAGRAM(c->program_counter,
-          c->memory_address_register % 16,
+          c->memory_address_register % MEMORY_SIZE,
           c->register_a,
-          c->memory[c->memory_address_register % 16],
+          c->memory[c->memory_address_register % MEMORY_SIZE],
           c->instruction_register,
           c->register_b,
           c->output_register,
@@ -50,8 +57,8 @@ void display_cpu(cpu *c) {
 }
 
 void execute_instruction(cpu *c) {
-  printf("RUNNING %d\n", c->instruction_register % 16);
-  switch((opcode) c->instruction_register % 16) {
+  printf("RUNNING %d\n", c->instruction_register % MEMORY_SIZE);
+  switch((opcode) c->instruction_register % MEMORY_SIZE) {
     case NOP: instruction_nop(c); break;
     case LDA: instruction_lda(c); break;
     case ADD: instruction_add(c); break;

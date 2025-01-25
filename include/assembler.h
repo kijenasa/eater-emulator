@@ -2,4 +2,6 @@
 
 #include "../include/cpu.h"
 
-uint8_t *assemble(char *str); // Don't forget to free()!
+// Don't forget to free()!
+uint8_t *assemble(char *str);
+uint8_t *assemble_file(char *path);

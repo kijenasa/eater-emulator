@@ -5,11 +5,13 @@
 #include "../include/assembler.h"
 
 int main(int argc, char *argv[]) {
-  char in[] = "LDI 1";
-  uint8_t byt = *assemble(in);
-  printf("%d 0x%x\n", byt, byt);
   cpu *c = cpu_new();
-  c->memory[0] = byt;
+
+  if(argc > 1) {
+    uint8_t *byt = assemble_file(argv[1]);
+    load_memory(c, byt);
+  }
+
   execute_program(c, VISUAL);
 
   cpu_free(c);
