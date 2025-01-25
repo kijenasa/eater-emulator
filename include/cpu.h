@@ -8,6 +8,8 @@
 
 #define MEMORY_SIZE 16
 
+#define VISUAL 1
+
 // Index positions of flags[]
 #define CARRY 0
 #define IS_ZERO 1

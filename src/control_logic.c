@@ -4,6 +4,8 @@
 #include "../include/memory.h"
 #include "../include/alu.h"
 
+#include<stdio.h>
+
 static void instruction_fetch(cpu *c) {
   register_out(c, c->program_counter);
   register_in(c, &c->memory_address_register);

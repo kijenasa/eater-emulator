@@ -28,9 +28,9 @@ void cpu_free(cpu *c) {
   free(c);
 }
 
-void execute_program(cpu *c, uint8_t visual) {
+void execute_program(cpu *c, uint8_t mode) {
   while(!c->halt) {
-    if(visual) {
+    if(mode == VISUAL) {
       display_cpu(c);
       getchar();
     }

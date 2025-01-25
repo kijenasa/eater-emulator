@@ -41,18 +41,17 @@ static char **get_lines(char *str, int count) {
 }
 
 static uint8_t get_instruction(char *str) {
-  opcode op;
+  opcode op = 0;
   uint8_t arg = 0;
 
   char *token = strtok(str, " ");
   op = get_opcode(token);
-
   token = strtok(NULL, " ");
   if(token != NULL) {
     arg = atoi(token);
   }
 
-  uint8_t instruction = (op << 4) | (arg & 0x0F);
+  uint8_t instruction = (arg << 4) | (op & 0x0F);
   return instruction;
 }
 
@@ -61,8 +60,7 @@ uint8_t *assemble(char *str) {
   char **lines = get_lines(str, count);
 
   uint8_t *byte_code = malloc(sizeof(uint8_t) * count);
-
-  for(int i = 0; i <= count; i++) {
+  for(int i = 0; i < count; i++) {
     byte_code[i] = get_instruction(lines[i]);
   }
 
