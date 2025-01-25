@@ -1,5 +1,7 @@
 # eater-emulator
 
+![example](https://cloud-q1rp8sz0d-hack-club-bot.vercel.app/0screenshot_20250125_172034.png)
+
 ## Usage
 
 ### Compiling
