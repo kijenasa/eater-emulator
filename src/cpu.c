@@ -45,7 +45,7 @@ void load_memory(cpu *c, uint8_t *bytes) {
 }
 
 void display_cpu(cpu *c) {
-//  clear_screen();
+  clear_screen();
   DIAGRAM(c->program_counter % 16,
           c->memory_address_register % MEMORY_SIZE,
           c->register_a,

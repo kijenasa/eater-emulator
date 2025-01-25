@@ -1,0 +1,8 @@
+LDI 0
+OUT
+ADD 5
+JMP 1
+NOP
+$1
+HLT
+NOP

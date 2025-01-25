@@ -4,8 +4,6 @@
 #include "../include/memory.h"
 #include "../include/alu.h"
 
-#include<stdio.h>
-
 static void instruction_fetch(cpu *c) {
   register_out(c, c->program_counter);
   register_in(c, &c->memory_address_register);
@@ -20,7 +18,7 @@ void instruction_nop(cpu *c) {
 }
 
 void instruction_lda(cpu *c) {
-  register_out(c, c->instruction_register);
+  register_out(c, get_parameter(c->instruction_register));
   register_in(c, &c->memory_address_register);
 
   memory_out(c);
@@ -30,7 +28,7 @@ void instruction_lda(cpu *c) {
 }
 
 void instruction_add(cpu *c) {
-  register_out(c, c->instruction_register);
+  register_out(c, get_parameter(c->instruction_register));
   register_in(c, &c->memory_address_register);
 
   memory_out(c);
@@ -43,7 +41,7 @@ void instruction_add(cpu *c) {
 }
 
 void instruction_sub(cpu *c) {
-  register_out(c, c->instruction_register);
+  register_out(c, get_parameter(c->instruction_register));
   register_in(c, &c->memory_address_register);
 
   memory_out(c);
@@ -56,7 +54,7 @@ void instruction_sub(cpu *c) {
 }
 
 void instruction_sta(cpu *c) {
-  register_out(c, c->instruction_register);
+  register_out(c, get_parameter(c->instruction_register));
   register_in(c, &c->memory_address_register);
 
   register_out(c, c->register_a);
@@ -66,14 +64,14 @@ void instruction_sta(cpu *c) {
 }
 
 void instruction_ldi(cpu *c) {
-  register_out(c, c->instruction_register);
+  register_out(c, get_parameter(c->instruction_register));
   register_in(c, &c->register_a);
 
   instruction_fetch(c);
 }
 
 void instruction_jmp(cpu *c) {
-  register_out(c, c->instruction_register);
+  register_out(c, get_parameter(c->instruction_register));
   register_in(c, &c->program_counter);
 
   instruction_fetch(c);
@@ -81,7 +79,7 @@ void instruction_jmp(cpu *c) {
 
 void instruction_jc(cpu *c) {
   if(c->flags[CARRY]) {
-    register_out(c, c->instruction_register);
+    register_out(c, get_parameter(c->instruction_register));
     register_in(c, &c->program_counter);
   }
 
@@ -90,7 +88,7 @@ void instruction_jc(cpu *c) {
 
 void instruction_jz(cpu *c) {
   if(c->flags[IS_ZERO]) {
-    register_out(c, c->instruction_register);
+    register_out(c, get_parameter(c->instruction_register));
     register_in(c, &c->program_counter);
   }
 
