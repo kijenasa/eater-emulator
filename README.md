@@ -26,3 +26,5 @@ You can immediate values into memory with a `$`. For example:
 $7
 ```
 will put 7 into memory.
+
+For more examples, see the `examples` directory
