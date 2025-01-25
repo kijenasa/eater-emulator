@@ -13,6 +13,7 @@ gcc src/* -o emulator
 ```
 ./emulator path/to/program.asm
 ```
+Press enter to step through the program, or `m` to dump the memory.
 
 ### Assembly
 
